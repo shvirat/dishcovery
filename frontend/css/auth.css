@@ -149,6 +149,95 @@
     display: block;
 }
 
+/* User Modal Styles */
+.user-profile {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    padding: 1rem 0;
+}
+
+.user-info {
+    background: var(--bg-card);
+    padding: 1.5rem;
+    border-radius: 12px;
+    border: 1px solid var(--border-light);
+    transition: background-color 0.3s ease;
+}
+
+.user-info p {
+    margin: 0.75rem 0;
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.user-info strong {
+    color: var(--text-primary);
+    font-weight: 600;
+}
+
+#logoutBtn {
+    background: var(--gradient-danger, linear-gradient(45deg, #ff4444, #ff6b6b));
+    width: 100%;
+    margin-top: 1rem;
+    padding: 12px;
+    border-radius: 12px;
+    border: none;
+    color: white;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+#logoutBtn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(255, 68, 68, 0.3);
+}
+
+/* Ensure user modal follows same animation */
+#userModal .auth-modal {
+    animation: modalFadeIn 0.45s cubic-bezier(0.22, 1.61, 0.36, 1) forwards;
+}
+
+/* Toast Notification */
+.toast {
+    position: fixed;
+    top: 80px;
+    right: 20px;
+    padding: 1rem 1.5rem;
+    border-radius: 12px;
+    background: var(--bg-glass);
+    border: 1px solid var(--border-light);
+    color: var(--text-primary);
+    font-size: 0.9rem;
+    z-index: 10000;
+    animation: toastSlideIn 0.3s ease forwards;
+    box-shadow: 0 5px 15px var(--shadow-darker);
+}
+
+.toast.success {
+    border-left: 4px solid #4CAF50;
+}
+
+.toast.error {
+    border-left: 4px solid #ff4444;
+}
+
+@keyframes toastSlideIn {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
 @media (max-width: 480px) {
     .auth-modal {
         width: 100%;
