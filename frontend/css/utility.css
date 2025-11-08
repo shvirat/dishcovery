@@ -1,0 +1,105 @@
+::-webkit-scrollbar {
+    width: 6px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--surface-light);
+    border-radius: 50px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--surface-glass);
+}
+
+* {
+    scrollbar-width: thin;
+    scrollbar-color: var(--surface-light) transparent;
+}
+
+#resultsLoader {
+    position: absolute;
+    bottom: 80px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 30px;
+    gap: 16px;
+}
+
+#resultsLoader.hidden {
+    display: none;
+}
+
+/* Dot Loader */
+.dots-loader {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    justify-content: center;
+}
+
+.dots-loader span {
+    width: 10px;
+    height: 10px;
+    background: var(--primary-color);
+    border-radius: 50%;
+    display: inline-block;
+    animation: bounce 0.6s infinite alternate;
+}
+
+.dots-loader span:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+.dots-loader span:nth-child(3) {
+    animation-delay: 0.4s;
+}
+
+#resultsLoader p {
+    font-size: 15px;
+    opacity: 0.85;
+    color: var(--text-primary);
+}
+
+.heading {
+    font-size: 24px;
+    color: var(--primary-color);
+    text-align: center;
+    padding-top: 50px;
+    display: block;
+}
+
+.para {
+    color: var(--text-secondary);
+    text-align: start;
+    margin-top: 30px;
+}
+
+/* Universal Close Button */
+.close-btn {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  height: 25px;
+  width: 25px;
+  border-radius: 50%;
+  border: 1px solid var(--border-light);
+  background: var(--bg-card);
+  color: var(--text-secondary);
+  font-size: 1.4rem;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transform: rotate(90deg);
+  transition: all 0.25s ease;
+  z-index: 1;
+}
+
+.close-btn:hover {
+  background: var(--border-primary);
+  color: var(--primary-color);
+  transform: rotate(180deg);
+}

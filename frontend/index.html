@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+
+<head>
+  <meta charset="UTF-8" />
+  <title>Dishcovery</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="css/theme.css" />
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/utility.css">
+  <link rel="stylesheet" href="css/sections.css">
+  <link rel="stylesheet" href="css/auth.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <link rel="shortcut icon" href="assets/pictures/dishcovery-icon-v1.png" type="image/x-icon/png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;1,200;1,300;1,400;1,500;1,600;1,700&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+</head>
+
+<body>
+  <div class="nav">
+    <h1 id="nav-logo">Dishcovery</h1>
+    <button id="loginMobileBtn" class="auth-nav-btn auth-mobile-btn">Login</button>
+    <div class="menu-icon" onclick="toggleMenu()">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+    <div class="navlinks">
+      <ul>
+        <li><a href="#">Home</a></li>
+        <li><a href="#results">Recipes</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#contact">Contact</a></li>
+        <li class="desktop-theme">
+          <button id="themeToggle" class="theme-toggle" aria-label="Toggle theme">
+            <i class="fas fa-moon"></i>
+          </button>
+        </li>
+        <li>
+          <button id="loginDesktopBtn" class="auth-nav-btn">Login</button>
+        </li>
+      </ul>
+    </div>
+    <button id="mobileThemeToggle" class="theme-toggle mobile-theme" aria-label="Toggle theme">
+      <i class="fas fa-moon"></i>
+    </button>
+  </div>
+  <div class="overlay" onclick="toggleMenu()"></div>
+  <div class="hero">
+    <div id="tagline">
+      <h3>Elevate Your Culinary Experience</h3>
+      <p>type it - cook it - love it</p>
+    </div>
+    <div class="search-section">
+      <input type="search" id="searchInput" placeholder="Search meal by name..." />
+      <button id="searchBtn">
+         <img src="assets/svgs/search-thin.svg" alt=" ">
+      </button>
+    </div>
+        <div id="welcomeMessage">
+      <div class="welcome-animation">
+        🍳 <span>Search for any meal to get started!</span>
+      </div>
+    </div>
+    <div id="resultsLoader" class="hidden">
+      <div class="dots-loader">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+      <p>Fetching meals...</p>
+    </div>
+    <div id="resultsOutput">
+
+    </div>
+
+  </div>
+  <!-- Results Section -->
+  <section id="results">
+    <div id="resultsMeta">
+
+    </div>
+    <div id="resultsContent">
+
+    </div>
+    <div id="randomRecipesSection">
+      <h2 class="heading">Featured Meals</h2>
+      <div id="randomRecipes">
+
+      </div>
+    </div>
+  </section>
+  <!-- About Section -->
+  <section id="about">
+    <h2 class="about-head">About Dishcovery</h2>
+    <div id="about-para">
+      <p>
+        Hey! Welcome to my web kitchen.<br>If you are searching for a specific site that can help you develop and
+        improve your cooking skills then you are at the best website. Dishcovery is all about sharing easy and delicious
+        worldwide recipes. I specially started this site because I have always love my mother cooking since I was a
+        little kid. I have seen her cooking with her magical hands while keeping a sweet smile on her face. I love
+        turning small and simple incredients into something special.
+      </p>
+      <p>
+        Now, you must be thinking that there are various sites available, what makes our page different. So, let me tell
+        you, we specially focus on every recipes from everyday meal to festive treats. You are cooking for any special
+        occasion, for your loved one or to surprise someone. Dishcovery shares step-by-step guide that even a teen can
+        understand and cook, or even if you never been to kitchen.
+      </p>
+      <p>
+        Our goal is to make cooking easy and full of fun so that you can make delicious dishes easily without facing any
+        kind of difficulties. So, now search the dish you like, explore the recipes and start cooking something yummy
+        together &lt3
+      </p>
+
+    </div>
+
+    <div class="highlights">
+      <div class="about-card ">
+        <h3>🌎 Global Recipes</h3>
+        <p>Explore thousands of recipes from international cuisines. Our API brings a world of flavors to your kitchen.
+        </p>
+      </div>
+
+      <div class="about-card ">
+        <h3>💡 Simple & Fast</h3>
+        <p>Built for speed and simplicity, Recipe Finder ensures smooth browsing and instant search results.</p>
+      </div>
+
+      <div class="about-card ">
+        <h3>🧠 Powered by APIs</h3>
+        <p>Integrated with powerful APIs that fetch real-time recipe data, ensuring fresh and accurate information.</p>
+      </div>
+    </div>
+  </section>
+  <!-- Contact Section -->
+  <section id="contact">
+    <div class="contact-container">
+      <div class="contact-text">
+        <h2>Get in Touch</h2>
+        <p>Have a question, suggestion, or want to collaborate? Drop us a message and we’ll get back to you
+          soon!</p>
+
+        <div class="contact-info">
+          <p><i class="fas fa-envelope"></i><a href="mailto:genpixel@yahoo.com"> genpixel@yahoo.com</a></p>
+          <p><i class="fas fa-phone"></i><a href="tel:+919876543210"> +91 98765 43210</a></p>
+          <p><i class="fas fa-map-marker-alt"></i><a href="https://maps.app.goo.gl/D5y9wCgT9V6vmGdN9" target="_blank">
+              New Delhi, India</a></p>
+        </div>
+      </div>
+
+      <form class="contact-form" id="contactForm" action="https://api.web3forms.com/submit" method="POST">
+        <input type="hidden" name="access_key" value="a49d3a47-b82c-401d-9dce-7c71698266bc" />
+
+        <div class="form-group">
+          <input type="text" id="name" name="name" placeholder="Your Name" required>
+        </div>
+        <div class="form-group">
+          <input type="email" id="email" name="email" placeholder="Your Email" required>
+        </div>
+        <div class="form-group">
+          <textarea id="message" name="message" rows="5" placeholder="Your Message..." required></textarea>
+        </div>
+        <button type="submit" class="contact-btn" id="sendBtn">Send Message</button>
+      </form>
+
+
+    </div>
+  </section>
+
+  <div class="modal-container hidden" id="recipe-modal">
+    <div class="modal-content">
+      <button id="modal-close-btn" class="close-btn">&times;</button>
+      <div id="recipe-details-content"></div>
+    </div>
+  </div>
+
+  <footer>
+    © <span>Dishcovery</span> 2025. Built with ❤️ for food lovers.
+  </footer>
+  <!-- Auth Modals -->
+  <div class="auth-modal-container" id="loginModal">
+    <div class="auth-modal">
+      <button class="close-btn auth-close-btn">&times;</button>
+      <div class="auth-header">
+        <h2>Welcome Back</h2>
+        <p>Sign in to your account</p>
+      </div>
+      <form class="auth-form" id="loginForm">
+        <div class="form-group">
+          <input type="email" placeholder="Email" required>
+          <div class="form-error">Please enter a valid email address</div>
+        </div>
+        <div class="form-group">
+          <input type="password" placeholder="Password" required>
+          <div class="form-error">Password must be at least 8 characters</div>
+        </div>
+        <button type="submit" class="auth-btn">Sign In</button>
+        <div class="auth-separator">
+          <span>OR</span>
+        </div>
+        <div class="auth-switch">
+          Don't have an account?<a href="#" id="showSignup">Sign up</a>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div class="auth-modal-container" id="signupModal">
+    <div class="auth-modal">
+      <button class="close-btn auth-close-btn">&times;</button>
+      <div class="auth-header">
+        <h2>Create Account</h2>
+        <p>Join our community today</p>
+      </div>
+      <form class="auth-form" id="signupForm">
+        <div class="form-group">
+          <input type="text" placeholder="Full Name" required>
+          <div class="form-error">Please enter your full name</div>
+        </div>
+        <div class="form-group">
+          <input type="email" placeholder="Email" required>
+          <div class="form-error">Please enter a valid email address</div>
+        </div>
+        <div class="form-group">
+          <input type="password" placeholder="Password" required>
+          <div class="form-error">Password must be at least 8 characters</div>
+        </div>
+        <div class="form-group">
+          <input type="password" placeholder="Confirm Password" required>
+          <div class="form-error">Passwords do not match</div>
+        </div>
+        <button type="submit" class="auth-btn">Create Account</button>
+        <div class="auth-separator">
+          <span>OR</span>
+        </div>
+        <div class="auth-switch">
+          Already have an account?<a href="#" id="showLogin">Sign in</a>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="js/script.js"></script>
+  <script src="js/randRec.js"></script>
+  <script src="js/theme.js"></script>
+  <script src="js/auth.js"></script>
+</body>
+
+</html>
