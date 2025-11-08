@@ -11,7 +11,7 @@
   <link rel="stylesheet" href="css/sections.css">
   <link rel="stylesheet" href="css/auth.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-  <link rel="shortcut icon" href="assets/pictures/dishcovery-icon-v1.png" type="image/x-icon/png" />
+  <link rel="shortcut icon" href="assets/pictures/dishcovery-favicon.png" type="image/x-icon/png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link
@@ -22,6 +22,7 @@
 
 <body>
   <div class="nav">
+    <!-- <img src="assets/pictures/nav-logo-dishcovery-clear.png" alt="nav-logo" id="nav-logo-img"> -->
     <h1 id="nav-logo">Dishcovery</h1>
     <button id="loginMobileBtn" class="auth-nav-btn auth-mobile-btn">Login</button>
     <div class="menu-icon" onclick="toggleMenu()">
@@ -192,11 +193,13 @@
       </div>
       <form class="auth-form" id="loginForm">
         <div class="form-group">
-          <input type="email" placeholder="Email" required>
+          <label for="loginEmail" class="visually-hidden">Email</label>
+          <input type="email" id="loginEmail" placeholder="Email" required>
           <div class="form-error">Please enter a valid email address</div>
         </div>
         <div class="form-group">
-          <input type="password" placeholder="Password" required>
+          <label for="loginPassword" class="visually-hidden">Password</label>
+          <input type="password" id="loginPassword" placeholder="Password" required>
           <div class="form-error">Password must be at least 8 characters</div>
         </div>
         <button type="submit" class="auth-btn">Sign In</button>
@@ -219,19 +222,23 @@
       </div>
       <form class="auth-form" id="signupForm">
         <div class="form-group">
-          <input type="text" placeholder="Full Name" required>
+          <label for="signupName" class="visually-hidden">Full Name</label>
+          <input type="text" id="signupName" placeholder="Full Name" required>
           <div class="form-error">Please enter your full name</div>
         </div>
         <div class="form-group">
-          <input type="email" placeholder="Email" required>
+          <label for="signupEmail" class="visually-hidden">Email</label>
+          <input type="email" id="signupEmail" placeholder="Email" required>
           <div class="form-error">Please enter a valid email address</div>
         </div>
         <div class="form-group">
-          <input type="password" placeholder="Password" required>
+          <label for="signupPassword" class="visually-hidden">Password</label>
+          <input type="password" id="signupPassword" placeholder="Password" required>
           <div class="form-error">Password must be at least 8 characters</div>
         </div>
         <div class="form-group">
-          <input type="password" placeholder="Confirm Password" required>
+          <label for="signupConfirmPassword" class="visually-hidden">Confirm Password</label>
+          <input type="password" id="signupConfirmPassword" placeholder="Confirm Password" required>
           <div class="form-error">Passwords do not match</div>
         </div>
         <button type="submit" class="auth-btn">Create Account</button>

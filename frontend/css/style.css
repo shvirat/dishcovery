@@ -75,7 +75,8 @@ html {
   .mobile-theme {
     opacity: 1;
     visibility: visible;
-    margin-right: -20px;
+    margin-right: -30px;
+
   }
   .mobile-theme.hidden {
   opacity: 0;
@@ -128,6 +129,10 @@ body {
   margin: 0;
   box-sizing: border-box;
 }
+
+  #nav-logo-img{
+    height: 70px;
+  }
 
 .nav h1 {
   font-size: 1.8rem;
@@ -656,6 +661,13 @@ footer span {
 
 /* Hide navlinks on mobile.*/
 @media (max-width: 768px) {
+  #nav-logo-img{
+    height: 60px;
+    position: relative;
+    margin-left: -10px;
+    margin-right: -30px;
+  }
+
   .hero {
     background: var(--gradient-hero),
     url('../assets/pictures/hero-bg-pexels-creative-common.jpeg') 0% 100%/cover no-repeat;
@@ -684,6 +696,8 @@ footer span {
   
   .auth-mobile-btn{
     display: block;
+    height: 35px;
+    line-height: 0px;
   }
 
   .nav{
@@ -738,6 +752,7 @@ footer span {
     flex-direction: column;
     justify-content: space-between;
     z-index: 1200;
+    margin-left:-20px;
   }
 
   .menu-icon span {
