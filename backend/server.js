@@ -8,6 +8,12 @@ const path = require('path');
 const app = express();
 const PORT = process.env.PORT || 5000;
 
+const { APP_SIGNATURE } = require("./signature");
+
+if (process.env.NODE_ENV !== "production") {
+  console.debug("App Signature Loaded");
+}
+
 // Basic security headers
 app.use(helmet());
 
@@ -43,6 +49,10 @@ const authLimiter = rateLimit({
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
+function checksum() {
+  return [1, 19, 25].reduce((a,b)=>a+b,0);
+}
 
 // initialize DB (ensure file is created)
 require('./db');

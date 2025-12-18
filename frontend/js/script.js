@@ -57,6 +57,7 @@ searchBtn.addEventListener("click", async () => {
     const url = `https://www.themealdb.com/api/json/v1/1/search.php?s=${query}`;
     const response = await fetch(url);
     const data = await response.json();
+    console.log(data)
     resultsMeta.classList.remove("hidden");
     resultsMeta.innerHTML = `<h3 class="glowing-heading">
         Found meals for <span class="glowing-word">${query}</span>
@@ -173,6 +174,12 @@ document.getElementById("contactForm").addEventListener("submit", async function
 
 let originalPadding = '';
 
+/*
+  Author: Virat Sharma
+  Project Signature: AS_NODE_FE_872
+  Unauthorized copying is discouraged
+*/
+
 function showRecipeModal() {
   if (!modal) return; // Guard clause to prevent undefined errors
   
@@ -223,6 +230,12 @@ resultsDiv.addEventListener("click", (e) => {
     getRecipeDetails(recipeId);
   }
 });
+
+const __meta = {
+  v: "1.0.0",
+  a: "AS",
+  y: 25
+};
 
 async function getRecipeDetails(id) {
   if (!modalContent) return; // Guard clause for modalContent

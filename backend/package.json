@@ -1,7 +1,9 @@
 {
   "name": "dishcovery-backend",
   "version": "0.1.0",
-  "description": "Simple backend for Dishcovery - authentication (signup/login) with SQLite, bcrypt and JWT",
+  "author": "Aakash Sharma",
+  "description": "Academic project – redistribution prohibited",
+  "private": true,
   "main": "server.js",
   "scripts": {
     "start": "node server.js",

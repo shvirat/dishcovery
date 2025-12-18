@@ -2,7 +2,8 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const db = require('../db');
 
-const JWT_SECRET = process.env.JWT_SECRET || 'dev_secret_change_me';
+// const JWT_SECRET = process.env.JWT_SECRET || 'dev_secret_change_me';
+const JWT_SECRET = process.env.JWT_SECRET || 'jab_tak_rahega_samose_me_aalu_kaam_apna_rahega_chalu_kya_bolte_ho';
 const JWT_EXPIRY = process.env.JWT_EXPIRY || '1h';
 
 function generateToken(user) {
