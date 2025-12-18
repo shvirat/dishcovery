@@ -1,7 +1,7 @@
 {
   "name": "dishcovery-backend",
-  "version": "0.1.0",
-  "author": "Aakash Sharma",
+  "version": "0.1.2",
+  "author": "Virat Sharma",
   "description": "Academic project – redistribution prohibited",
   "private": true,
   "main": "server.js",
