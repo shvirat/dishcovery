@@ -3,8 +3,8 @@ const jwt = require('jsonwebtoken');
 const db = require('../db');
 
 // const JWT_SECRET = process.env.JWT_SECRET || 'dev_secret_change_me';
-const JWT_SECRET = process.env.JWT_SECRET || 'jab_tak_rahega_samose_me_aalu_kaam_apna_rahega_chalu_kya_bolte_ho';
-const JWT_EXPIRY = process.env.JWT_EXPIRY || '1h';
+const JWT_SECRET = process.env.JWT_SECRET;
+const JWT_EXPIRY = process.env.JWT_EXPIRY;
 
 function generateToken(user) {
   return jwt.sign({ id: user.id, email: user.email, name: user.name }, JWT_SECRET, { expiresIn: JWT_EXPIRY });
