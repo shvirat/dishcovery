@@ -37,7 +37,12 @@ let authOriginalPadding = null;
 // API base — set to backend origin. When frontend runs on a different port (5500)
 // we need to call the backend explicitly (on port 5000) so relative fetch() doesn't hit
 // the frontend static server.
-const API_BASE = 'http://localhost:5000';
+const API_BASE =
+  window.location.hostname === "localhost" ||
+  window.location.hostname === "127.0.0.1"
+    ? "http://localhost:5000"
+    : "";
+
 
 // Toast notification function
 function showToast(message, type = 'success') {
@@ -172,6 +177,7 @@ async function checkSession() {
         } else {
             // If session is invalid, clear it
             localStorage.removeItem('token');
+            showToast("Session expired. Please log in again.", "error");
         }
     } catch (error) {
         console.warn('Session check failed:', error);
