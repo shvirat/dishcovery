@@ -2,7 +2,7 @@
   "name": "dishcovery-backend",
   "version": "0.1.2",
   "author": "Virat Sharma",
-  "description": "Academic project – redistribution prohibited",
+  "description": "Personal project – redistribution prohibited",
   "private": true,
   "main": "server.js",
   "scripts": {
