@@ -1,91 +1,107 @@
-# Dishcovery
+# 🍽️ Dishcovery
 
-[![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
-[![Status](https://img.shields.io/badge/status-active-brightgreen.svg)](https://github.com/)
+**Dishcovery** is a modern full-stack web application for discovering dishes and recipes, built with a clean static frontend and a secure backend.
 
-A small, dependency-free static frontend for discovering dishes and recipes. Built with plain HTML, CSS and JavaScript — ideal for demos, prototypes, and static hosting (GitHub Pages).
-
-## Demo
-
-Open `frontend/index.html` locally in your browser, or serve the `frontend/` folder as described below.
-
-## Quick start
-
-1. Clone the repo:
-
-    ```powershell
-    git clone <your-repo-url>
-    cd Dishcovery
-    ```
-
-2. Serve the frontend (recommended to avoid asset/path issues):
-
-    ```powershell
-    python -m http.server 3000 --directory frontend
-    # or
-    npx http-server frontend -p 3000
-    ```
-
-3. Open http://localhost:3000 in your browser.
-
-## Deploy to GitHub Pages
-
-Option A — Use `docs/` on `main` (recommended for static frontend):
-
-- Copy the contents of `frontend/` into a `docs/` folder at the repository root and commit.
-- In your repository Settings → Pages, set the source to the `main` branch and the `/docs` folder.
-
-Option B — `gh-pages` branch:
-
-- Use a deployment action or a tool (e.g. `gh-pages` npm package) to publish `frontend/` to a `gh-pages` branch.
-
-## What’s included
-
-- `frontend/index.html` — main static UI
-- `frontend/css/` — styles (utility, layout sections)
-- `frontend/js/` — `script.js` and `randRec.js` for UI behavior
-- `frontend/assets/` — logos and SVGs
-- `backend/` — optional placeholder for server/API code
-
-## Tech
-
-- Vanilla HTML, CSS, JavaScript
-- No build tools required
-
-## Integrating a backend (optional)
-
-If you add a backend API, keep the frontend expecting simple JSON endpoints such as:
-
-- GET /api/search?q=...  -> array of recipe objects
-- GET /api/random       -> a single recipe or small array
-
-Recipe object example:
-
-```json
-{
-  "id": "string",
-  "title": "string",
-  "image": "url"
-}
-```
-
-## Contributing
-
-- Small, focused pull requests are preferred.
-- Include screenshots or short notes for UI changes.
-
-## License
-
-MIT — add a `LICENSE` file if you haven't already.
+The project focuses on **fundamentals done right** — no frontend frameworks, a well-structured backend, real authentication, and production-ready deployment.
 
 ---
 
-If you want, I can also:
-- Add a `docs/` copy of the frontend and commit it so GitHub Pages can be enabled with zero extra steps.
-- Create a minimal `package.json` and an npm script to publish to `gh-pages` automatically.
+## 🚀 Live Links
 
-Tell me which of these you'd like me to do next.
+- 🌐 **Live Website**: https://dishcovery-pi.vercel.app  
+- ⚙️ **Backend API**: https://dishcovery-api.vercel.app  
+- 🐙 **GitHub Repository**: https://github.com/shvirat/dishcovery  
 
+---
 
+## ✨ Features
 
-<!-- End of README -->
+### Frontend
+- Responsive, modern UI
+- Login & signup modal flow
+- JWT-based authentication
+- Session restore on page reload
+- Toast notifications for user feedback
+- Built using **pure HTML, CSS & JavaScript**
+
+### Backend
+- Node.js + Express REST API
+- MongoDB Atlas database
+- JWT authentication
+- Secure password hashing with bcrypt
+- Rate limiting & security headers
+- Serverless deployment on Vercel
+- Custom animated API landing page (no “Cannot GET /” 😄)
+
+---
+
+## 🧱 Tech Stack
+
+### Frontend
+- HTML5
+- CSS3
+- JavaScript
+
+### Backend
+- Node.js
+- Express
+- MongoDB (Atlas)
+- Mongoose
+- JWT
+- bcrypt
+- Helmet, CORS, Rate Limiting
+
+### Deployment
+- **Vercel** (Frontend & Backend)
+- **MongoDB Atlas** (Database)
+
+---
+
+## 🔌 API Endpoints
+
+### Authentication
+- `POST /api/auth/signup` — Register a new user  
+- `POST /api/auth/login` — Login user  
+- `GET /api/auth/me` — Get current user (JWT required)
+
+### Health
+- `GET /api/health` — API status check
+
+---
+
+## 🔐 Authentication Flow
+
+- User logs in → JWT stored in `localStorage`
+- JWT sent via `Authorization: Bearer <token>`
+- Session restored using `GET /api/auth/me`
+- Expired sessions handled gracefully
+
+---
+
+## 🧠 Why Dishcovery?
+
+- No frontend frameworks — strong fundamentals
+- Clean, readable backend architecture
+- Strong serverless-ready design
+- Ideal for learning real-world full-stack deployment
+
+---
+
+## 🤝 Contributing
+
+- Small, focused pull requests are welcome
+- Please explain changes clearly
+- Avoid unnecessary dependencies
+
+---
+
+## 📄 License
+
+MIT License  
+See the `LICENSE` file for details.
+
+---
+
+## 🙌 Acknowledgements
+
+Built with ❤️ while learning real-world backend deployment, authentication, and system design.
