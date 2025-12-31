@@ -404,24 +404,59 @@ function updateUIForLoggedInUser(user) {
     const desktopBtn = document.getElementById('loginDesktopBtn');
     const mobileBtn = document.getElementById('loginMobileBtn');
     
-    function updateButton(btn) {
-        if (btn) {
-            // Create new button to clear all previous listeners
-            const newBtn = btn.cloneNode(true);
-            newBtn.textContent = `Welcome, ${user.name}`;
-            btn.parentNode.replaceChild(newBtn, btn);
+    // function updateButton(btn) {
+    //     if (btn) {
+    //         // Create new button to clear all previous listeners
+    //         const newBtn = btn.cloneNode(true);
+    //         newBtn.textContent = `Welcome, ${user.name}`;
+    //         btn.parentNode.replaceChild(newBtn, btn);
             
-            // Add user modal event listener
-            newBtn.addEventListener('click', (e) => {
-                e.preventDefault();
-                showModal(userModal);
-            });
-        }
-    }
+    //         // Add user modal event listener
+    //         newBtn.addEventListener('click', (e) => {
+    //             e.preventDefault();
+    //             showModal(userModal);
+    //         });
+    //     }
+    // }
     
     // Update both buttons
-    updateButton(desktopBtn);
-    updateButton(mobileBtn);
+    // updateButton(desktopBtn);
+    // updateButton(mobileBtn);
+
+    function updateButton(btn, isMobile = false) {
+    if (!btn) return;
+
+    // Clone to remove old listeners
+    const newBtn = btn.cloneNode(true);
+
+    if (isMobile) {
+        // Mobile: static user icon (SVG)
+        newBtn.innerHTML = `
+            <svg width="20" height="20" viewBox="0 0 24 24" 
+                 fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="12" cy="8" r="4" stroke="currentColor" stroke-width="2"/>
+                <path d="M4 20c0-4 4-6 8-6s8 2 8 6" 
+                      stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+        `;
+        newBtn.setAttribute("aria-label", "User menu");
+    } else {
+        // Desktop: welcome text
+        newBtn.textContent = `Welcome, ${user.name}`;
+    }
+
+    btn.parentNode.replaceChild(newBtn, btn);
+
+    newBtn.addEventListener("click", (e) => {
+        e.preventDefault();
+        showModal(userModal);
+    });
+    }
+
+    // Apply
+    updateButton(desktopBtn, false);
+    updateButton(mobileBtn, true);
+
 }
 
 // Close modal when clicking outside
