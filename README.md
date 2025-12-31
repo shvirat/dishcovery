@@ -1,5 +1,9 @@
 # 🍽️ Dishcovery
 
+[![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+[![Status](https://img.shields.io/badge/status-active-brightgreen.svg)](https://github.com/shvirat/dishcovery)
+[![Version](https://img.shields.io/badge/version-1.1.3-orange)](https://github.com/shvirat/dishcovery/releases)
+
 **Dishcovery** is a modern full-stack web application for discovering dishes and recipes, built with a clean static frontend and a secure backend.
 
 The project focuses on **fundamentals done right** — no frontend frameworks, a well-structured backend, real authentication, and production-ready deployment.
