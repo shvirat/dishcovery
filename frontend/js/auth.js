@@ -58,6 +58,7 @@ function showToast(message, type = 'success') {
 
 // Current user state
 let currentUser = null;
+let signupPrefillData = null;
 
 // Helper: parse JSON response safely (fallback to text) to avoid Unexpected end of JSON input
 async function parseJSONSafe(response) {
@@ -269,7 +270,7 @@ async function handleLogin(e) {
         try {
             // Show loading state
             submitBtn.disabled = true;
-            submitBtn.textContent = 'Signing in...';
+            submitBtn.classList.add('btn-loading');
             
             const response = await fetch(`${API_BASE}/api/auth/login`, {
                 method: 'POST',
@@ -299,7 +300,7 @@ async function handleLogin(e) {
             showError(email, error.message || 'Login failed. Please try again.');
         } finally {
             submitBtn.disabled = false;
-            submitBtn.textContent = 'Sign In';
+            submitBtn.classList.remove('btn-loading');
         }
     }
 }
@@ -347,7 +348,7 @@ async function handleSignup(e) {
         try {
             // Show loading state
             submitBtn.disabled = true;
-            submitBtn.textContent = 'Creating account...';
+            submitBtn.classList.add('btn-loading');
             
             const response = await fetch(`${API_BASE}/api/auth/signup`, {
                 method: 'POST',
@@ -364,9 +365,16 @@ async function handleSignup(e) {
 
             const parsed = await parseJSONSafe(response);
             if (response.ok) {
-                // Reset form before any transitions
-                signupForm.reset();
-                
+
+            // Store values for login autofill
+            signupPrefillData = {
+                email: email.value,
+                // password: password.value
+            };
+
+            // Reset form AFTER storing values
+            signupForm.reset();
+                        
                 // Hide signup modal
                 hideModal(signupModal);
                 
@@ -376,7 +384,39 @@ async function handleSignup(e) {
                 // Wait for the success message to be visible before showing login modal
                 setTimeout(() => {
                     showModal(loginModal);
+
+                    // Autofill login form
+                    if (signupPrefillData && loginForm) {
+                        const loginEmail = loginForm.querySelector('input[type="email"]');
+                        const loginPassword = loginForm.querySelector('input[type="password"]');
+
+                        if (loginEmail) {
+                            loginEmail.value = signupPrefillData.email;
+                            clearError(loginEmail);
+                            loginEmail.classList.add('autofilled');
+                            setTimeout(() => loginEmail.classList.remove('autofilled'), 1400);
+
+                        }
+
+                        // ⚠ OPTIONAL 
+                        // if (loginPassword) {
+                        //     loginPassword.value = signupPrefillData.password;
+                        //     clearError(loginPassword);
+                        // }
+                        // redirectTypingToPassword(loginEmail, loginPassword);
+                        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                            loginPassword.focus();
+                        } else {
+                            focusAfterAnimation(loginModal, loginPassword);
+                        }
+
+                    }
+
+                    // Clear temp data after use
+                    signupPrefillData = null;
+
                 }, 500);
+
                 
                 // Return false to ensure no form submission
                 return false;
@@ -388,12 +428,43 @@ async function handleSignup(e) {
             showError(email, error.message || 'Signup failed. Please try again.');
         } finally {
             submitBtn.disabled = false;
-            submitBtn.textContent = 'Create Account';
+            submitBtn.classList.remove('btn-loading');
         }
     }
     
     // Return false to prevent form submission
     return false;
+}
+
+// Safe focus helper
+function focusAfterAnimation(modal, input) {
+    if (!modal || !input) return;
+
+    const onAnimationEnd = (e) => {
+        if (e.target !== modal) return;
+        modal.removeEventListener('animationend', onAnimationEnd);
+        input.focus({ preventScroll: true });
+    };
+    modal.addEventListener('animationend', onAnimationEnd);
+}
+
+// Move typing to password field automatically
+function redirectTypingToPassword(emailInput, passwordInput) {
+    if (!emailInput || !passwordInput) return;
+
+    const handler = (e) => {
+        // Ignore control keys
+        if (e.key.length > 1) return;
+
+        e.preventDefault();
+        passwordInput.focus();
+        passwordInput.value += e.key;
+
+        // Remove listener after first redirect
+        emailInput.removeEventListener('keydown', handler);
+    };
+
+    emailInput.addEventListener('keydown', handler);
 }
 
 // UI Update
