@@ -14,7 +14,8 @@ connectDB();
 /* ------------------ MIDDLEWARE ------------------ */
 app.use(helmet());
 app.use(cors({
-  origin: "*", // frontend hosted separately on Vercel
+  origin: ["https://dishcovery-pi.vercel.app","https://dishcovery-ai.vercel.app"], //Default:"*"
+  methods: ["GET", "POST", "PUT", "DELETE"],
   credentials: true
 }));
 
