@@ -14,6 +14,84 @@ const modal = document.getElementById("recipe-modal");
 const modalContent = document.getElementById("recipe-details-content");
 const modalCloseBtn = document.getElementById("modal-close-btn");
 
+  const banner = document.getElementById("updateBanner");
+  const closeBtn = document.getElementById("closeUpdate");
+  const pill = document.getElementById("updatePill");
+
+  let bannerVisible = false;
+  let lastScrollY = window.scrollY;
+  let exitTimeout;
+
+  // 🔑 NEW FLAG
+  let closedByUser = false;
+
+  /* -------- Show banner on every reload -------- */
+  window.addEventListener("load", () => {
+    setTimeout(() => {
+      banner.classList.add("show");
+      bannerVisible = true;
+      closedByUser = false; // reset on reload
+    }, 1800);
+  });
+
+  /* -------- Hide banner -------- */
+  function hideBanner(byUser = false) {
+    if (!bannerVisible) return;
+
+    banner.classList.remove("show");
+    banner.classList.add("exit");
+    bannerVisible = false;
+
+    if (byUser) closedByUser = true;
+
+    clearTimeout(exitTimeout);
+    exitTimeout = setTimeout(() => {
+      banner.classList.remove("exit");
+      pill.classList.add("show");
+    }, 600);
+  }
+
+  /* -------- Show banner -------- */
+  function showBanner(force = false) {
+    if (bannerVisible) return;
+    if (closedByUser && !force) return; // 🔥 KEY RULE
+
+    pill.classList.remove("show");
+
+    setTimeout(() => {
+      banner.classList.add("show");
+      bannerVisible = true;
+      closedByUser = false;
+    }, 200);
+  }
+
+  /* -------- Close icon (manual dismiss) -------- */
+  closeBtn.addEventListener("click", () => {
+    hideBanner(true);
+  });
+
+  /* -------- Scroll behavior -------- */
+  window.addEventListener("scroll", () => {
+    const currentY = window.scrollY;
+
+    // Scroll down → hide banner
+    if (currentY > 120 && bannerVisible) {
+      hideBanner(false);
+    }
+
+    // Scroll back to top → show banner ONLY if not closed manually
+    if (currentY < 40 && lastScrollY > currentY) {
+      showBanner(false);
+    }
+
+    lastScrollY = currentY;
+  });
+
+  /* -------- Pill click (force show) -------- */
+  pill.addEventListener("click", () => {
+    showBanner(true); // force = true
+  });
+
 searchBtn.addEventListener("click", () => {
   searchBtn.classList.add("clicked");
 

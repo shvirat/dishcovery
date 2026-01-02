@@ -77,6 +77,28 @@ async function parseJSONSafe(response) {
     }
 }
 
+document.addEventListener("click", function (e) {
+  const btn = e.target.closest(".toggle-password");
+  if (!btn) return;
+
+  const inputId = btn.getAttribute("data-target");
+  const input = document.getElementById(inputId);
+  const icon = btn.querySelector("i");
+
+  if (!input || !icon) return;
+
+  if (input.type === "password") {
+    input.type = "text";
+    icon.classList.replace("fa-eye", "fa-eye-slash");
+    btn.classList.add("active");
+  } else {
+    input.type = "password";
+    icon.classList.replace("fa-eye-slash", "fa-eye");
+    btn.classList.remove("active");
+  }
+});
+
+
 // Show/Hide Modal Functions
 function showModal(modal) {
     if (!modal) return;
