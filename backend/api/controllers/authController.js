@@ -102,11 +102,19 @@ exports.login = async (req, res) => {
 
 
 exports.me = async (req, res) => {
-  res.json({
-    user: {
-      id: req.user.id,
-      email: req.user.email,
-      name: req.user.name
-    }
-  });
+  try {
+    const user = await User.findById(req.user.id)
+      .select("name email favorites");
+
+    res.json({
+      user: {
+        id: user._id,
+        name: user.name,
+        email: user.email,
+        favorites: user.favorites
+      }
+    });
+  } catch (err) {
+    res.status(500).json({ message: "Internal server error" });
+  }
 };

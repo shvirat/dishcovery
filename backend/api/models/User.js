@@ -16,6 +16,10 @@ const UserSchema = new mongoose.Schema({
   password: {
     type: String,
     required: true
+  },
+  favorites: {
+    type: [String], // store meal IDs
+    default: []
   }
 }, { timestamps: true });
 
