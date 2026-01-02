@@ -7,13 +7,29 @@ if (!cached) {
 }
 
 async function connectDB() {
-  if (cached.conn) return cached.conn;
+  if (cached.conn) {
+    return cached.conn;
+  }
 
   if (!cached.promise) {
-    cached.promise = mongoose.connect(process.env.MONGODB_URI, {
-      dbName: "dishcovery_dev",
-      bufferCommands: false,
-    }).then(mongoose => mongoose);
+    cached.promise = mongoose
+      .connect(process.env.MONGODB_URI, {
+        dbName: "dishcovery_dev",
+        bufferCommands: false,
+
+        // 🔥 CRITICAL FOR VERCEL
+        maxPoolSize: 10,
+        serverSelectionTimeoutMS: 5000,
+        socketTimeoutMS: 45000,
+      })
+      .then((mongooseInstance) => {
+        return mongooseInstance;
+      })
+      .catch((err) => {
+        // 🔥 RESET PROMISE ON FAILURE
+        cached.promise = null;
+        throw err;
+      });
   }
 
   cached.conn = await cached.promise;
