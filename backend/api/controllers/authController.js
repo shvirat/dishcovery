@@ -100,7 +100,6 @@ exports.login = async (req, res) => {
   }
 };
 
-
 exports.me = async (req, res) => {
   try {
     const user = await User.findById(req.user.id)

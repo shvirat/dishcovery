@@ -20,7 +20,9 @@ const UserSchema = new mongoose.Schema({
   favorites: {
     type: [String], // store meal IDs
     default: []
-  }
+  },
+  resetPasswordToken: String,
+  resetPasswordExpires: Date
 }, { timestamps: true });
 
 module.exports = mongoose.model("User", UserSchema);

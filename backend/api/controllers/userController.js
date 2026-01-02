@@ -1,5 +1,6 @@
 const bcrypt = require("bcrypt");
 const User = require("../models/User");
+const crypto = require("crypto");
 
 /* -------- TOGGLE FAVORITE -------- */
 exports.toggleFavorite = async (req, res) => {
@@ -64,6 +65,7 @@ exports.updateProfile = async (req, res) => {
   });
 };
 
+/* -------- DELETE ACCOUNT -------- */
 exports.deleteAccount = async (req, res) => {
   const user = await User.findById(req.user.id);
 
@@ -74,4 +76,54 @@ exports.deleteAccount = async (req, res) => {
   await user.deleteOne();
 
   res.json({ message: "Account deleted successfully" });
+};
+
+
+/* -------- FORGOT PASSWORD -------- */
+exports.forgotPassword = async (req, res) => {
+  const { email } = req.body;
+
+  const user = await User.findOne({ email });
+  if (!user) return res.json({ success: true }); // prevent email enumeration
+
+  const token = crypto.randomBytes(32).toString("hex");
+
+  user.resetPasswordToken = crypto
+    .createHash("sha256")
+    .update(token)
+    .digest("hex");
+
+  user.resetPasswordExpires = Date.now() + 15 * 60 * 1000;
+  await user.save();
+
+  res.json({
+    success: true,
+    resetLink: `${process.env.FRONTEND_URL}/reset-password?token=${token}`
+  });
+};
+
+/* -------- RESET PASSWORD -------- */
+exports.resetPassword = async (req, res) => {
+  const { token, password } = req.body;
+
+  const hashedToken = crypto
+    .createHash("sha256")
+    .update(token)
+    .digest("hex");
+
+  const user = await User.findOne({
+    resetPasswordToken: hashedToken,
+    resetPasswordExpires: { $gt: Date.now() }
+  });
+
+  if (!user) {
+    return res.status(400).json({ message: "Invalid or expired token" });
+  }
+
+  user.password = await bcrypt.hash(password, 12);
+  user.resetPasswordToken = undefined;
+  user.resetPasswordExpires = undefined;
+  await user.save();
+
+  res.json({ success: true });
 };
