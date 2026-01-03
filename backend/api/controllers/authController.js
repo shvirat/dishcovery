@@ -5,6 +5,8 @@ const User = require("../models/User");
 const JWT_SECRET = process.env.JWT_SECRET;
 const JWT_EXPIRY = process.env.JWT_EXPIRY || "1h";
 
+const connectDB = require("../db");
+
 function generateToken(user) {
   return jwt.sign(
     {
@@ -66,6 +68,10 @@ exports.signup = async (req, res) => {
 
 /* ------------------ LOGIN ------------------ */
 exports.login = async (req, res) => {
+    try {
+    await connectDB(); 
+    
+  
   const { email, password } = req.body;
 
   if (!email || !password)
@@ -73,7 +79,6 @@ exports.login = async (req, res) => {
 
   const emailLower = email.toLowerCase().trim();
 
-  try {
     const user = await User.findOne({ email: emailLower }).select("+password");
     if (!user) {
       return res.status(401).json({ message: "Invalid email or password." });
