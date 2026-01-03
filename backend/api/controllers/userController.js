@@ -3,13 +3,14 @@ const User = require("../models/User");
 const crypto = require("crypto");
 
 const connectDB = require("../db");
-connectDB();
 
 /* -------- TOGGLE FAVORITE -------- */
 exports.toggleFavorite = async (req, res) => {
+  try {
+  await connectDB(); 
+
   const { mealId } = req.params;
 
-  try {
     const user = await User.findById(req.user.id);
     if (!user) {
       return res.status(404).json({ message: "User not found" });
@@ -35,15 +36,19 @@ exports.toggleFavorite = async (req, res) => {
 /* -------- GET FAVORITES -------- */
 exports.getFavorites = async (req, res) => {
   try {
+    await connectDB();
     const user = await User.findById(req.user.id).select("favorites");
     res.json({ favorites: user.favorites });
   } catch (err) {
+    console.error("Get favorite error:", err);
     res.status(500).json({ message: "Internal server error" });
   }
 };
 
 /* -------- UPDATE PROFILE -------- */
 exports.updateProfile = async (req, res) => {
+  try{
+  await connectDB();
   const { name, password } = req.body;
   const user = await User.findById(req.user.id);
 
@@ -66,10 +71,16 @@ exports.updateProfile = async (req, res) => {
     email: user.email,
     favorites: user.favorites
   });
+  } catch (err) {
+    console.error("Update profile error:", err);
+    return res.status(500).json({ message: "Internal server error" });
+  }
 };
 
 /* -------- DELETE ACCOUNT -------- */
 exports.deleteAccount = async (req, res) => {
+  try{
+  await connectDB();
   const user = await User.findById(req.user.id);
 
   if (!user) {
@@ -79,11 +90,17 @@ exports.deleteAccount = async (req, res) => {
   await user.deleteOne();
 
   res.json({ message: "Account deleted successfully" });
+  } catch (err) {
+    console.error("Delete account error:", err);
+    return res.status(500).json({ message: "Internal server error" });
+  }
 };
 
 
 /* -------- FORGOT PASSWORD -------- */
 exports.forgotPassword = async (req, res) => {
+  try{
+  await connectDB();
   const { email } = req.body;
 
   const user = await User.findOne({ email });
@@ -103,10 +120,16 @@ exports.forgotPassword = async (req, res) => {
     success: true,
     resetLink: `${process.env.FRONTEND_URL}/reset-password?token=${token}`
   });
+  } catch (err) {
+    console.error("Forgot password error:", err);
+    return res.status(500).json({ message: "Internal server error" });
+  }
 };
 
 /* -------- RESET PASSWORD -------- */
 exports.resetPassword = async (req, res) => {
+  try{
+  await connectDB();
   const { token, password } = req.body;
 
   const hashedToken = crypto
@@ -129,4 +152,8 @@ exports.resetPassword = async (req, res) => {
   await user.save();
 
   res.json({ success: true });
+  } catch (err) {
+    console.error("Reset password error:", err);
+    return res.status(500).json({ message: "Internal server error" });
+  }
 };
