@@ -21,6 +21,9 @@ function generateToken(user) {
 
 /* ------------------ SIGNUP ------------------ */
 exports.signup = async (req, res) => {
+  try {
+  await connectDB(); 
+
   const { name, email, password } = req.body;
 
   if (!name || !email || !password)
@@ -36,7 +39,6 @@ exports.signup = async (req, res) => {
     return res.status(400).json({ message: "Password must be at least 8 characters." });
   }
 
-  try {
     const existingUser = await User.findOne({ email: emailLower });
     if (existingUser) {
       return res.status(409).json({ message: "Email already registered." });
@@ -68,10 +70,9 @@ exports.signup = async (req, res) => {
 
 /* ------------------ LOGIN ------------------ */
 exports.login = async (req, res) => {
-    try {
-    await connectDB(); 
-    
-  
+  try {
+  await connectDB(); 
+   
   const { email, password } = req.body;
 
   if (!email || !password)
@@ -107,9 +108,18 @@ exports.login = async (req, res) => {
 
 exports.me = async (req, res) => {
   try {
+    await connectDB(); 
+
+    if (!req.user || !req.user.id) {
+      return res.status(401).json({ message: "Unauthorized" });
+    }
+
     const user = await User.findById(req.user.id)
       .select("name email favorites");
 
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
     res.json({
       user: {
         id: user._id,
@@ -119,6 +129,7 @@ exports.me = async (req, res) => {
       }
     });
   } catch (err) {
-    res.status(500).json({ message: "Internal server error" });
+      console.error("Me route error:", err);
+      res.status(500).json({ message: "Internal server error" });
   }
 };

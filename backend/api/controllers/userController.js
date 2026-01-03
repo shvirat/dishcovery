@@ -2,6 +2,9 @@ const bcrypt = require("bcrypt");
 const User = require("../models/User");
 const crypto = require("crypto");
 
+const connectDB = require("../db");
+connectDB();
+
 /* -------- TOGGLE FAVORITE -------- */
 exports.toggleFavorite = async (req, res) => {
   const { mealId } = req.params;
