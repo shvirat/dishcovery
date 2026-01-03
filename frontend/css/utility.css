@@ -297,8 +297,29 @@
 }
 
 @media (max-width: 640px) {
-  .update-content {
+  /* .update-content {
     flex-direction: column;
     align-items: stretch;
-  }
+  } */
+  .update-text p {
+  font-size: 9px;
+}
+.update-badge {
+  background: linear-gradient(135deg, #f97316, #fb7185);
+  font-size: 8px;
+  font-weight: 800;
+  padding: 6px 10px;
+  border-radius: 999px;
+}
+.update-content {
+  padding: 10px 15px;
+}
+.update-btn{
+  font-size: 8px;
+  font-weight: 600;
+  padding: 5px 10px;
+}
+.update-text{
+  max-width: 63%;
+}
 }
