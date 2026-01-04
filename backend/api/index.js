@@ -258,13 +258,13 @@ app.get("/", (req, res) => {
       <a class="btn" href="https://github.com/shvirat/dishcovery" target="_blank">
         🐙 GitHub Repository
       </a>
-      <a class="btn" href="https://dishcovery.vercel.app" target="_blank">
+      <a class="btn" href="https://dishcovery-v2.vercel.app" target="_blank">
         🌐 Live Website
       </a>
     </div>
 
     <footer>
-      © ${new Date().getFullYear()} Dishcovery API • Built with Node.js & MongoDB
+      © ${new Date().getFullYear()} Dishcovery API • Built with Express & Node
     </footer>
   </div>
 </body>
