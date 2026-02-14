@@ -268,7 +268,7 @@ function clearError(input) {
 async function handleLogin(e) {
     e.preventDefault();
     const email = loginForm.querySelector('input[type="email"]');
-    const password = loginForm.querySelector('input[type="password"]');
+    const password = loginForm.querySelector('#loginPassword');
     const submitBtn = loginForm.querySelector('button[type="submit"]');
     
     // Clear previous errors
@@ -333,8 +333,8 @@ async function handleSignup(e) {
     
     const name = signupForm.querySelector('input[type="text"]');
     const email = signupForm.querySelector('input[type="email"]');
-    const password = signupForm.querySelectorAll('input[type="password"]')[0];
-    const confirmPassword = signupForm.querySelectorAll('input[type="password"]')[1];
+    const password = signupForm.querySelector('#signupPassword');
+    const confirmPassword = signupForm.querySelector('#signupConfirmPassword');
     const submitBtn = signupForm.querySelector('button[type="submit"]');
     
     // Clear previous errors
@@ -535,7 +535,7 @@ function updateUIForLoggedInUser(user) {
         newBtn.setAttribute("aria-label", "User menu");
     } else {
         // Desktop: welcome text
-        newBtn.textContent = `Welcome, ${user.name}`;
+        newBtn.textContent = `Welcome, ${user.name.trim().split(/\s+/)[0]}`;
     }
 
     btn.parentNode.replaceChild(newBtn, btn);
