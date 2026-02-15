@@ -61,18 +61,20 @@ exports.signup = async (req, res) => {
 <html>
 <head>
     <style>
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; color: #334155; margin: 0; padding: 0; background-color: #f8fafc; }
-        .container { max-width: 600px; margin: 20px auto; background: #ffffff; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05); }
-        .header { background: linear-gradient(90deg, #22d3ee, #a78bfa); padding: 30px; text-align: center; }
-        .header h1 { color: #ffffff; margin: 0; font-size: 28px; font-weight: 700; letter-spacing: -0.5px; }
-        .content { padding: 40px; }
-        .content h2 { color: #1e293b; margin-top: 0; }
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
+        body { font-family: 'Poppins', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; color: #ffffff; margin: 0; padding: 0; background-color: #000000; }
+        .container { max-width: 600px; margin: 20px auto; background: #0d0d0d; border: 1px solid rgba(255, 102, 0, 0.2); border-radius: 12px; overflow: hidden; }
+        .header { background: #000000; padding: 30px; text-align: center; border-bottom: 2px solid #ff6600; }
+        .header h1 { color: #ff6600; margin: 0; font-size: 28px; font-weight: 700; letter-spacing: 1px; }
+        .content { padding: 40px; background: #0d0d0d; }
+        .content h2 { color: #ffffff; margin-top: 0; font-weight: 600; }
+        .content p { color: #dcdcdc; }
         .features { margin: 25px 0; padding: 0; list-style: none; }
-        .features li { margin-bottom: 12px; display: flex; align-items: center; }
-        .features li:before { content: "🍳"; margin-right: 10px; }
+        .features li { margin-bottom: 15px; display: flex; align-items: center; color: #ffffff; }
+        .features li:before { content: "🍳"; margin-right: 12px; font-size: 18px; }
         .btn-container { text-align: center; margin: 30px 0; }
-        .btn { background-color: #22d3ee; color: #ffffff !important; padding: 14px 28px; text-decoration: none; border-radius: 8px; font-weight: 600; display: inline-block; }
-        .footer { padding: 20px; text-align: center; font-size: 13px; color: #94a3b8; background-color: #f1f5f9; }
+        .btn { background-color: #ff6600; color: #ffffff !important; padding: 14px 28px; text-decoration: none; border-radius: 50px; font-weight: 600; display: inline-block; box-shadow: 0 4px 15px rgba(255, 102, 0, 0.3); }
+        .footer { padding: 20px; text-align: center; font-size: 13px; color: #999999; background-color: #000000; border-top: 1px solid rgba(255, 255, 255, 0.1); }
     </style>
 </head>
 <body>
@@ -81,23 +83,23 @@ exports.signup = async (req, res) => {
             <h1>Dishcovery</h1>
         </div>
         <div class="content">
-            <h2>Welcome to the Kitchen, ${user.name}!</h2>
+            <h2>Welcome to the Kitchen, ${user?.name?.trim().split(/\s+/)[0] || "chef"}!</h2>
             <p>We're thrilled to have you join our community of food lovers. Dishcovery is your new culinary companion, designed to make cooking easy and fun.</p>
-            <p>Here's what you can do with your new account:</p>
+            <p>Explore your new kitchen:</p>
             <ul class="features">
-                <li>Explore thousands of global recipes</li>
-                <li>Save your favorite meals for quick access</li>
-                <li>Get step-by-step guides for every dish</li>
-                <li>Discover featured meals every day</li>
+                <li>Search thousands of global recipes</li>
+                <li>Save your favorites for quick access</li>
+                <li>Step-by-step guides for every dish</li>
+                <li>Discover new featured meals daily</li>
             </ul>
             <div class="btn-container">
                 <a href="${process.env.FRONTEND_URL}" class="btn">Start Cooking Now</a>
             </div>
-            <p>If you have any questions or suggestions, just reply to this email. We'd love to hear from you!</p>
-            <p>Happy Cooking,<br>The Dishcovery Team</p>
+            <p>If you have any questions, just reply to this email. Happy cooking!</p>
+            <p>Best regards,<br><strong>The Dishcovery Team</strong></p>
         </div>
         <div class="footer">
-            <p>&copy; ${new Date().getFullYear()} Dishcovery. All rights reserved.</p>
+            <p>© ${new Date().getFullYear()} Dishcovery. Built with ❤️ for food lovers.</p>
         </div>
     </div>
 </body>
@@ -109,7 +111,7 @@ exports.signup = async (req, res) => {
       to: user.email,
       subject: "Welcome to Dishcovery! 🍳",
       html: welcomeHtml,
-      text: `Welcome to Dishcovery, ${user.name}! We're thrilled to have you. Start exploring recipes at ${process.env.FRONTEND_URL}`
+      text: `Welcome to Dishcovery, ${user?.name?.trim().split(/\s+/)[0] || "chef"}! We're thrilled to have you. Start exploring recipes at ${process.env.FRONTEND_URL}`
     }).catch(err => console.error("Welcome email failed:", err));
 
     return res.status(201).json({

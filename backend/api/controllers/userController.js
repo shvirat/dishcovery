@@ -124,17 +124,20 @@ exports.forgotPassword = async (req, res) => {
 <html>
 <head>
     <style>
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; color: #334155; margin: 0; padding: 0; background-color: #f8fafc; }
-        .container { max-width: 600px; margin: 20px auto; background: #ffffff; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05); }
-        .header { background: linear-gradient(90deg, #22d3ee, #a78bfa); padding: 30px; text-align: center; }
-        .header h1 { color: #ffffff; margin: 0; font-size: 28px; font-weight: 700; letter-spacing: -0.5px; }
-        .content { padding: 40px; }
-        .content h2 { color: #1e293b; margin-top: 0; }
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
+        body { font-family: 'Poppins', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; color: #ffffff; margin: 0; padding: 0; background-color: #000000; }
+        .container { max-width: 600px; margin: 20px auto; background: #0d0d0d; border: 1px solid rgba(255, 102, 0, 0.2); border-radius: 12px; overflow: hidden; }
+        .header { background: #000000; padding: 30px; text-align: center; border-bottom: 2px solid #ff6600; }
+        .header h1 { color: #ff6600; margin: 0; font-size: 28px; font-weight: 700; letter-spacing: 1px; }
+        .content { padding: 40px; background: #0d0d0d; }
+        .content h2 { color: #ffffff; margin-top: 0; font-weight: 600; }
+        .content p { color: #dcdcdc; }
         .btn-container { text-align: center; margin: 30px 0; }
-        .btn { background-color: #22d3ee; color: #ffffff !important; padding: 14px 28px; text-decoration: none; border-radius: 8px; font-weight: 600; display: inline-block; transition: background-color 0.3s ease; }
-        .footer { padding: 20px; text-align: center; font-size: 13px; color: #94a3b8; background-color: #f1f5f9; }
-        .expire-text { font-size: 14px; color: #ef4444; margin-top: 20px; font-weight: 500; }
-        .link-alt { word-break: break-all; font-size: 12px; color: #64748b; margin-top: 25px; }
+        .btn { background-color: #ff6600; color: #ffffff !important; padding: 14px 28px; text-decoration: none; border-radius: 50px; font-weight: 600; display: inline-block; box-shadow: 0 4px 15px rgba(255, 102, 0, 0.3); }
+        .footer { padding: 20px; text-align: center; font-size: 13px; color: #999999; background-color: #000000; border-top: 1px solid rgba(255, 255, 255, 0.1); }
+        .expire-text { font-size: 14px; color: #ff7755; margin-top: 20px; font-weight: 500; }
+        .link-alt { word-break: break-all; font-size: 12px; color: #999999; margin-top: 25px; border-top: 1px solid rgba(255, 255, 255, 0.1); padding-top: 20px; }
+        .link-alt p { margin: 5px 0; }
     </style>
 </head>
 <body>
@@ -144,20 +147,20 @@ exports.forgotPassword = async (req, res) => {
         </div>
         <div class="content">
             <h2>Reset Your Password</h2>
-            <p>Hello,</p>
+            <p>Hello ${user?.name?.trim().split(/\s+/)[0] || "there"},</p>
             <p>We received a request to reset the password for your Dishcovery account. Click the button below to choose a new password:</p>
             <div class="btn-container">
                 <a href="${resetLink}" class="btn">Reset Password</a>
             </div>
-            <p class="expire-text">This link will expire in 15 minutes for security reasons.</p>
+            <p class="expire-text">⚠️ This link will expire in 15 minutes for security reasons.</p>
             <p>If you did not request a password reset, you can safely ignore this email. Your password will remain unchanged.</p>
             <div class="link-alt">
                 <p>If the button doesn't work, copy and paste this link into your browser:</p>
-                <p>${resetLink}</p>
+                <p style="color: #ff6600;">${resetLink}</p>
             </div>
         </div>
         <div class="footer">
-            <p>&copy; ${new Date().getFullYear()} Dishcovery. All rights reserved.</p>
+            <p>© ${new Date().getFullYear()} Dishcovery. Built with ❤️ for food lovers.</p>
         </div>
     </div>
 </body>
