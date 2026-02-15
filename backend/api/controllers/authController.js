@@ -62,19 +62,19 @@ exports.signup = async (req, res) => {
 <head>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
-        body { font-family: 'Poppins', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; color: #ffffff; margin: 0; padding: 0; background-color: #000000; }
-        .container { max-width: 600px; margin: 20px auto; background: #0d0d0d; border: 1px solid rgba(255, 102, 0, 0.2); border-radius: 12px; overflow: hidden; }
-        .header { background: #000000; padding: 30px; text-align: center; border-bottom: 2px solid #ff6600; }
+        body { font-family: 'Poppins', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; color: #334155; margin: 0; padding: 0; background-color: #f8fafc; }
+        .container { max-width: 600px; margin: 20px auto; background: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.03); }
+        .header { background: #ffffff; padding: 30px; text-align: center; border-bottom: 3px solid #ff6600; }
         .header h1 { color: #ff6600; margin: 0; font-size: 28px; font-weight: 700; letter-spacing: 1px; }
-        .content { padding: 40px; background: #0d0d0d; }
-        .content h2 { color: #ffffff; margin-top: 0; font-weight: 600; }
-        .content p { color: #dcdcdc; }
+        .content { padding: 40px; }
+        .content h2 { color: #1e293b; margin-top: 0; font-weight: 600; }
+        .content p { color: #475569; }
         .features { margin: 25px 0; padding: 0; list-style: none; }
-        .features li { margin-bottom: 15px; display: flex; align-items: center; color: #ffffff; }
+        .features li { margin-bottom: 15px; display: flex; align-items: center; color: #475569; }
         .features li:before { content: "🍳"; margin-right: 12px; font-size: 18px; }
         .btn-container { text-align: center; margin: 30px 0; }
         .btn { background-color: #ff6600; color: #ffffff !important; padding: 14px 28px; text-decoration: none; border-radius: 50px; font-weight: 600; display: inline-block; box-shadow: 0 4px 15px rgba(255, 102, 0, 0.3); }
-        .footer { padding: 20px; text-align: center; font-size: 13px; color: #999999; background-color: #000000; border-top: 1px solid rgba(255, 255, 255, 0.1); }
+        .footer { padding: 20px; text-align: center; font-size: 13px; color: #94a3b8; background-color: #f8fafc; border-top: 1px solid #e2e8f0; }
     </style>
 </head>
 <body>
@@ -99,12 +99,13 @@ exports.signup = async (req, res) => {
             <p>Best regards,<br><strong>The Dishcovery Team</strong></p>
         </div>
         <div class="footer">
-            <p>© ${new Date().getFullYear()} Dishcovery. Built with ❤️ for food lovers.</p>
+            <p>&copy; ${new Date().getFullYear()} Dishcovery. All rights reserved.</p>
         </div>
     </div>
 </body>
 </html>
     `;
+
 
     // Fire and forget email (don't await so signup isn't delayed by SMTP)
     sendEmail({

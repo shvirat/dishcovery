@@ -264,7 +264,7 @@ app.get("/", (req, res) => {
     </div>
 
     <footer>
-      © ${new Date().getFullYear()} Dishcovery API • Secure Backend
+      © ${new Date().getFullYear()} Dishcovery API. All rights reserved.
     </footer>
   </div>
 </body>
