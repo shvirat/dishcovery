@@ -1,51 +1,35 @@
-const nodemailer = require("nodemailer");
-const { google } = require("googleapis");
+    const nodemailer = require("nodemailer");
+    /**
+     * Send an email using Nodemailer
+     * @param {Object} options - Email options
+     */
+    const sendEmail = async (options) => {
+        try {
+            const transporter = nodemailer.createTransport({
+                host: "smtp.gmail.com",
+                port: 587,
+                secure: false, // use STARTTLS (upgrade connection to TLS after connecting)
+                auth: {
+                    user: process.env.SMTP_USER,
+                    pass: process.env.SMTP_PASS,
+                },
+            });
 
-/**
- * Send an email using Nodemailer with OAuth2
- * @param {Object} options - Email options
- */
-const sendEmail = async (options) => {
-    const oauth2Client = new google.auth.OAuth2(
-        process.env.GOOGLE_CLIENT_ID,
-        process.env.GOOGLE_CLIENT_SECRET,
-        "https://developers.google.com/oauthplayground"
-    );
+            const mailOptions = {
+                from: `Dishcovery <${process.env.SMTP_USER}>`,
+                to: options.to,
+                subject: options.subject,
+                text: options.text,
+                html: options.html,
+            };
 
-    oauth2Client.setCredentials({
-        refresh_token: process.env.GOOGLE_REFRESH_TOKEN,
-    });
+            const info = await transporter.sendMail(mailOptions);
+            console.log("Email sent: %s", info.messageId);
+            return info;
+        } catch (error) {
+            console.error("Error sending email:", error);
+            throw error;
+        }
+    };
 
-    try {
-        const accessToken = await oauth2Client.getAccessToken();
-
-        const transporter = nodemailer.createTransport({
-            service: "gmail",
-            auth: {
-                type: "OAuth2",
-                user: process.env.SMTP_USER,
-                clientId: process.env.GOOGLE_CLIENT_ID,
-                clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-                refreshToken: process.env.GOOGLE_REFRESH_TOKEN,
-                accessToken: accessToken.token,
-            },
-        });
-
-        const mailOptions = {
-            from: `Dishcovery <${process.env.SMTP_USER}>`,
-            to: options.to,
-            subject: options.subject,
-            text: options.text,
-            html: options.html,
-        };
-
-        const info = await transporter.sendMail(mailOptions);
-        console.log("Email sent: %s", info.messageId);
-        return info;
-    } catch (error) {
-        console.error("Error sending email:", error);
-        throw error;
-    }
-};
-
-module.exports = sendEmail;
+    module.exports = sendEmail;
